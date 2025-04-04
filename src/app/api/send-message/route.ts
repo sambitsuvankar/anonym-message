@@ -1,5 +1,5 @@
-import dbConnect from "../../../../src/lib/dbConnect";
-import UserModel from "../../../../src/model/User";
+import dbConnect from "../../../lib/dbConnect";
+import UserModel from "../../../model/User";
 
 import { Message } from "../../../model/User";
 
@@ -9,6 +9,7 @@ export async function POST(request : Request){
     const {username, content} = await request.json();
     try {
         const user = await UserModel.findOne({username})
+
 
         if(!user){
             return Response.json({
@@ -31,7 +32,7 @@ export async function POST(request : Request){
 
         return Response.json({
             success : true,
-            messages : user[0].messages
+            message : `Message sent to ${username}`,
         },{status : 200})
     } catch (error) {
         console.log("An Unexpected error occured", error)

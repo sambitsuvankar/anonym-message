@@ -1,4 +1,4 @@
-import { SearchParams } from './../../../../node_modules/next/dist/server/request/search-params.d';
+import { SearchParams } from 'next/dist/server/request/search-params';
 import UserModel  from '../../../model/User';
 import dbConnect  from '../../../lib/dbConnect';
 import { z } from 'zod';

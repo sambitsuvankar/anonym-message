@@ -1,4 +1,4 @@
-import { Strategy } from './../../../../../node_modules/openid-client/types/index.d';
+import { Strategy } from 'openid-client';
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs";
@@ -16,21 +16,23 @@ export const authOptions : NextAuthOptions = {
             },
             async authorize(credentials : any) : Promise<any> { 
                 await dbConnect()
-
+                console.log("credential :", credentials)
                 try {
                     const user = await UserModel.findOne({
                         $or : [
-                            {email : credentials.identifier.email},
-                            {username : credentials.identifier.username}
+                            {email : credentials.identifier},
+                            {username : credentials.identifier}
                         ]
                     })
+
+                    console.log("User : ", user)
 
                     if(!user){
                         throw new Error("No User found with this email")
                     }
-                    if(!user.isVerified){
-                        throw new Error("Please verify your email first")
-                    }
+                    // if(!user.isVerified){
+                    //     throw new Error("Please verify your email first")
+                    // }
 
                     const isPasswordCorrect = await bcrypt.compare(credentials.password, user.password)
 

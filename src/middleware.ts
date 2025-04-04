@@ -4,7 +4,7 @@ export { default } from 'next-auth/middleware'
 
 
 
-export const config = { // On ehich path do we want to apply middleware
+export const config = { // On which path do we want to apply middleware
     matcher : [
         '/sign-in',
         '/sign-up',
@@ -22,8 +22,8 @@ export async function middleware(request : NextRequest){
         token && 
         (url.pathname.startsWith('/sign-in') ||
         url.pathname.startsWith('/sign-up') ||
-        url.pathname.startsWith('/verify') ||
-        url.pathname.startsWith('/')
+        url.pathname.startsWith('/verify') 
+        // url.pathname.startsWith('/')
     )
     ){
         return NextResponse.redirect(new URL('/dashboard', request.url))

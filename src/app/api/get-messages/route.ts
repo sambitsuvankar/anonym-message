@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import dbConnect  from 'src/lib/dbConnect';
 import { User } from 'next-auth';
-import { authOptions } from './../auth/[...nextauth]/options';
+import { authOptions } from '../auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
 import UserModel from '../../../model/User'
 
@@ -27,7 +27,7 @@ export async function GET(request: Request){
         try {
             const user = await UserModel.aggregate([
                 {
-                    $match : {id : userId}
+                    $match : {_id : userId}
                 },
                 {
                     $unwind : "$messages"
@@ -46,11 +46,10 @@ export async function GET(request: Request){
                     message : "No messages found"
                 }, {status : 404})
             }
-
             return Response.json({
                 success : true,
                 messages : user[0].messages
-            }, {status : 404})
+            }, {status : 200})
         } catch (error) {
             console.log(error)
             return Response.json(
