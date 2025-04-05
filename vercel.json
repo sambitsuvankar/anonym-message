@@ -1,0 +1,4 @@
+{
+    "buildCommand": "echo TAILWIND_DISABLE_OXIDE=$TAILWIND_DISABLE_OXIDE && npm run build"
+  }
+  
