@@ -1,4 +1,3 @@
-import { openai } from '@ai-sdk/openai';
 import { NextResponse } from 'next/server';
 import { streamText } from 'ai';
 import OpenAI from 'openai';
